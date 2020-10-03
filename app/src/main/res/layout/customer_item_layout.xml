@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_margin="2dp"
     android:padding="5dp"
     android:background="#fff">
@@ -13,17 +13,33 @@
         android:layout_height="wrap_content"
         android:text="NAMA"
         android:textSize="20sp"
+        android:textStyle="bold"
         android:layout_weight="1"
         android:textColor="#525252"
         android:id="@+id/tv_nama"/>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="081312341234"
-        android:textColor="#525252"
-        android:layout_weight="2"
-        android:id="@+id/tv_telp"
-        android:gravity="end" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MR000"
+            android:textColor="#525252"
+            android:layout_weight="2"
+            android:id="@+id/tv_id"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="081312341234"
+            android:textColor="#525252"
+            android:layout_weight="2"
+            android:id="@+id/tv_telp"
+            android:gravity="end"/>
+
+    </LinearLayout>
 
 </LinearLayout>

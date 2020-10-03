@@ -2,9 +2,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.hendro.android_java_api_crud.MainActivity">
+
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/m_customer"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="Customer"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/m_supplier"
+        android:orderInCategory="100"
+        android:title="Supplier"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/m_barang"
+        android:orderInCategory="100"
+        android:title="Barang"
         app:showAsAction="never" />
 </menu>
