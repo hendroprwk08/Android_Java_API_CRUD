@@ -2,6 +2,7 @@ package com.hendro.android_java_api_crud;
 
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -88,6 +89,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("Hendro", "onResume: resume");
+
+        try {
+            //cek fragment mana yang sebelumnya aktif
+            if( Cons.ACTIVE_FRAGMENT.equals("FirstFragment")){
+                loadFragment(new FirstFragment());
+            }
+        }catch (Exception e){
+            Log.d("Hendro", "onResume: "+ e.getMessage() );
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -115,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
     void simpanCustomer(String id, String nama, String telp){
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String url = "https://kodeasik.000webhostapp.com/customer-000.php?action=simpan&id="+ id +"&nama="+ nama +"&telp="+ telp;
+        String url = "https://kodeasik.000webhostapp.com/customer-000.php?action=simpan&id="+ id +"&nama="+ Uri.encode( nama ) +"&telp="+ Uri.encode( telp );
 
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(
                 Request.Method.POST,
@@ -126,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         String id, nama, telp;
+
+                        Log.d("Hendro ", "onResponse: "+ response.toString());
 
                         if (response.optString("result").equals("true")){
                             Toast.makeText(getApplicationContext(), "Yeay, data pertambah!", Toast.LENGTH_SHORT).show();

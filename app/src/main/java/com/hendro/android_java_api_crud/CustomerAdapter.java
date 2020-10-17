@@ -1,9 +1,12 @@
 package com.hendro.android_java_api_crud;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,7 +75,22 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.GridVi
                 alertDialog.setNegativeButton("LIHAT", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(context, "Sabar ya, fitur ini belum dibuat", Toast.LENGTH_SHORT).show();
+
+                    //beritahu posisi fragment yang sedang aktif adalah FirstFragment
+                    Cons.ACTIVE_FRAGMENT = "FirstFragment";
+
+                    Bundle b = new Bundle();
+                    b.putString("b_id", id);
+                    b.putString("b_nama", nama);
+                    b.putString("b_telp", telp);
+
+                    Intent intent = new Intent(context, DetilCustomer.class);
+                    intent.putExtras(b);
+
+                    //context.startActivity(intent);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        ((Activity) context).startActivityForResult(intent, 1, b);
+                    }
                     }
                 });
 
@@ -101,7 +119,8 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.GridVi
 
                                     }else{
                                         Toast.makeText(context, "O ow, sepertinya harus dicoba lagi", Toast.LENGTH_SHORT).show();
-                                    }                    }
+                                    }
+                                }
                             }, new Response.ErrorListener() {
 
                         @Override
